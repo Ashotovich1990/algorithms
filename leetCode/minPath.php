@@ -6,10 +6,11 @@ class Solution {
  */
 function shortestPathBinaryMatrix($grid) {
     $cost_grid = $this->createGrid(sizeof($grid));
-    $cost_grid[0][0] = $grid[0][0] === 1? -1 : 1;
+    $cost_grid[0][0] = $grid[0][0] === 1 ? -1 : 1;
     
     for ($j = 1; $j < sizeof($grid); $j++) {
-        if ($grid[$i][$j] === -1) {
+        
+        if ($grid[0][$j] === 1) {
                 $cost_grid[0][$j] = -1;
         } else {
                 $cost_grid[0][$j] = $cost_grid[0][$j - 1] === -1 ? -1 : $cost_grid[0][$j - 1] + 1;
@@ -17,8 +18,8 @@ function shortestPathBinaryMatrix($grid) {
     }; 
     
     for ($i = 1; $i < sizeof($grid); $i++) {
-         if ($grid[$i][$j] === -1) {
-                $cost_grid[0][$j] = -1;
+         if ($grid[$i][0] === 1) {
+                $cost_grid[$i][0] = -1;
         } else {
                 $cost_grid[$i][0] = $cost_grid[$i-1][0] === -1 ? -1 : $cost_grid[$i-1][0] + 1;
         };
@@ -26,7 +27,7 @@ function shortestPathBinaryMatrix($grid) {
     
     for ($i = 1; $i < sizeof($grid); $i++) {
         for ($j = 1; $j < sizeof($grid); $j++) {
-            if ($grid[$i][$j] === -1) {
+            if ($grid[$i][$j] === 1) {
                 $cost_grid[$i][$j] = -1;
             } else {
                 $up = $cost_grid[$i-1][$j] === -1 ? INF : $cost_grid[$i-1][$j] ;
