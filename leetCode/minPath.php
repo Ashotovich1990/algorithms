@@ -1,5 +1,5 @@
 class Solution {
-
+<!-- work only for right and down movement -->
 /**
  * @param Integer[][] $grid
  * @return Integer
@@ -52,3 +52,77 @@ function createGrid($size) {
     return $res;
 }
 }
+
+
+<!-- DFS approach attempt -->
+
+if (isset($checked[$start[0] . $start[1]])) return $checked[$start[0] . $start[1]];
+        if (!isset($grid[$start[0]][$start[1]])) return -1; 
+        if ($grid[$start[0]][$start[1]] === 1) return -1;
+        if ($start[0] === sizeof($grid) - 1 && $start[1] === sizeof($grid) - 1) return 1;
+        
+       
+        $grid[$start[0]][$start[1]] = 1;
+        
+        $p1 = INF; 
+        $p2 = INF; 
+        $p3 = INF; 
+        $p4 = INF; 
+        $p5 = INF; 
+        $p6 = INF;
+        $p7 = INF;
+        $p8 = INF;
+        
+        // if (!isset($visited[$start[0] + 1 . $start[1]])) { 
+            $p1 = $this->shortestPathBinaryMatrix($grid, [$start[0] + 1, $start[1]], $checked);
+            $checked[$start[0] + 1 . $start[1]] = $p1 === -1 ? -1 : 1 + $p1;
+            $p1 = $p1 === -1 ? INF : 1 + $p1;
+        // };
+        
+        // if (!isset($visited[$start[0] + 1 . $start[1] - 1])) { 
+            $p2 = $this->shortestPathBinaryMatrix($grid, [$start[0] + 1, $start[1] - 1], $checked);
+            $checked[$start[0] + 1 . $start[1] - 1] = $p2 === -1 ? -1 : 1 + $p2;
+            $p2 = $p2 === -1 ? INF : 1 + $p2;
+        // };
+        
+        // if (!isset($visited[$start[0] + 1 . $start[1] + 1])) { 
+            $p3 = $this->shortestPathBinaryMatrix($grid, [$start[0] + 1, $start[1] + 1],  $checked);
+            $checked[$start[0] + 1 . $start[1] + 1] = $p3 === -1 ? -1 : 1 + $p3;
+            $p3 = $p3 === -1 ? INF : 1 + $p3;
+        // };
+        
+        // if (!isset($visited[$start[0] . $start[1] + 1])) { 
+            $p4 = $this->shortestPathBinaryMatrix($grid, [$start[0], $start[1] + 1],  $checked);
+            $checked[$start[0] . $start[1] + 1] = $p4 === -1 ? -1 : 1 + $p4;
+            $p4 = $p4 === -1 ? INF : 1 + $p4;
+        // };
+        
+        // if (!isset($visited[$start[0] . $start[1] - 1])) { 
+            $p5 = $this->shortestPathBinaryMatrix($grid, [$start[0], $start[1] - 1], $checked);
+            $checked[$start[0] . $start[1] - 1] = $p5 === -1 ? -1 : 1 + $p5;
+            $p5 = $p5 === -1 ? INF : 1 + $p5;
+        // };
+        
+        // if (!isset($visited[$start[0] - 1 . $start[1]])) { 
+            $p6 = $this->shortestPathBinaryMatrix($grid, [$start[0] - 1, $start[1]],  $checked);
+            $checked[$start[0] - 1 . $start[1]] = $p6 === -1 ? -1 : 1 + $p6;
+            $p6 = $p6 === -1 ? INF : 1 + $p6;
+        // };
+        
+        // if (!isset($visited[$start[0] - 1 . $start[1] - 1])) { 
+            $p7 = $this->shortestPathBinaryMatrix($grid, [$start[0] - 1, $start[1] - 1], $checked);
+            $checked[$start[0] - 1 . $start[1] - 1] = $p7 === -1 ? -1 : 1 + $p7;
+            $p7 = $p7 === -1 ? INF : 1 + $p7;
+        // };
+        
+        // if (!isset($visited[$start[0] - 1 . $start[1] + 1])) { 
+            $p8 = $this->shortestPathBinaryMatrix($grid, [$start[0] - 1, $start[1] + 1],  $checked);
+            $checked[$start[0] - 1 . $start[1] + 1] = $p8 === -1 ? -1 : 1 + $p8;
+            $p8 = $p8 === -1 ? INF : 1 + $p8;
+        // };
+        
+        $res = min($p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8); 
+        
+        return is_infinite($res) ? -1 : $res;
+        
+    }
