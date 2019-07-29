@@ -12,3 +12,37 @@ var repeatedSubstringPattern = function(s) {
     
     return false;
 };
+
+// class Solution php using KMP {
+
+    /**
+     * @param String $s
+     * @return Boolean
+     */
+    function repeatedSubstringPattern($s) {
+        $i = 0; 
+        $j = 1; 
+        $table = [0]; 
+        $len = 0;
+        while ($j < strlen($s)) {
+            if ($s[$i] === $s[$j]) {
+                $len++; 
+                 $table[$j] = $len;
+                 $j++;
+                $i++;
+            } else {
+                if (!$i) {
+                    $len = 0;
+                    $table[$j] = $len;
+                    $j++;
+                } else {
+                    if ($i) $i = $table[$i-1];
+                    $len = $i;
+                };     
+            };
+        }; 
+        
+        if (!$table[strlen($s) - 1]) return false;
+        return !(strlen($s) % (strlen($s) - $table[strlen($s) - 1]));
+    }
+}
