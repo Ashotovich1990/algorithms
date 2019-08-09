@@ -21,6 +21,7 @@ const sortedListToBST = function(head) {
     return builtTree(0, size - 1);   
 };
 
+
 const findSize = function(head) {
     let size = 0; 
     let node = head; 
