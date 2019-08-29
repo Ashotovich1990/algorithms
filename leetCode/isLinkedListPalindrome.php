@@ -14,7 +14,7 @@ function isPalindrome($head) {
     $size = sizeof($reversed);
     for ($i = 0; $i < floor($size/2); $i++) {
         if ($reversed[$size - 1 - $i] !== $reversed[$i]) return false;
-        $node = $node->next;
+
     };
     
     return true;
