@@ -5,20 +5,19 @@ var removeZeroSumSublists = function(head) {
     while (flag) {
         flag = false;
         let sums = {};
+        sums[0] = dummy;
         let sum = 0;
-        let node = dummy;
+        let node = dummy.next;
         while (node) {
             sum += node.val;
             if (sums[sum]) {
                 sums[sum].next = node.next;
-                node.next = null;
-                node = sums[sum].next;
+                delete sums[sum];
                 flag = true;
-                break;
             } else {
                 sums[sum] = node;
-                node = node.next;
             };
+            node = node.next;
         };
     };
  
