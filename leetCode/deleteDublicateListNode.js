@@ -1,25 +1,26 @@
 var deleteDuplicates = function(head) {
-    let count = {};
-    let node = head;
-    while (node) {
-        count[node.val] = count[node.val] ? count[node.val] + 1 : 1;
-        node = node.next;
-    };
-    
     let dummy = new ListNode();
+    let removed = new Set();
     dummy.next = head;
     let prev = dummy;
-    node = head;
+    let node = head;
+    
     while (node) {
-      if (count[node.val] > 1) {
-          prev.next = node.next;
-          node.next = null;
-          node = prev.next;
-      } else {
-          prev = node;
-          node = node.next;
-      }
-    }
+        if (removed.has(node.val)) {
+            while (node && removed.has(node.val)) {
+                node = node.next;
+                prev.next = node;
+            }
+        } else if (node.next && node.val === node.next.val) {
+            removed.add(node.val);
+            prev.next = node.next;
+            node.next = null;
+            node = prev.next;
+        } else {
+            prev = node;
+            node = node.next;
+        };
+    };
     
     return dummy.next;
 };
