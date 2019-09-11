@@ -77,3 +77,23 @@ function findTheMax (stack, A, index) {
     }
     return stack[start];
 }
+
+// sorting 
+var maxWidthRamp = function(A) {
+    let sortedIndex = A.map((el,i)=> [el,i]).sort((a,b) => sortTwoDim(a,b));
+    let res = 0; 
+    let m = Infinity;
+    sortedIndex.forEach(el => {
+        res = Math.max(res, el[1] - m);
+        m = Math.min(el[1], m);
+    });
+
+    return res;
+};
+
+var sortTwoDim = function(a,b) {
+    if (a[0] === b[0]) {
+        return a[1] - b[1];
+    }
+    return a[0] - b[0];
+}
