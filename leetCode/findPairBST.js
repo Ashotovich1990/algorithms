@@ -1,19 +1,14 @@
 const findTarget = function(root, k) {
-    let set = {};
-    const traverse = function(root) {
-        if (!root) return;
-        traverse(root.left);
-        set[k - root.val] = root;; 
-        traverse(root.right);
-    }; 
+    let set = new Set();
     
-    const findPair = function(root) {
+    const traverse = function(root) {
         if (!root) return false;
-        if (set[root.val] && set[root.val] !== root) return true;
-      
-        return findPair(root.left) || findPair(root.right);
+        // if (root.val === k) return true;
+        if (set.has(root.val)) return true;
+        set.add(k-root.val);
+        
+        return traverse(root.left) || traverse(root.right);
     };
     
-    traverse(root);
-    return findPair(root);
+    return traverse(root);
 };
