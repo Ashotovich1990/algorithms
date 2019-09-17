@@ -1,3 +1,27 @@
+// optimzed
+
+const merge = (a1,n,a2,m) => {
+    let l = a1.length - 1; 
+    n--;
+    m--;
+
+    while (n >= 0) {
+        if (a1[m] > a2[n]) {
+            a1[l] = a1[m];
+            m--;
+        } else {
+            a1[l] = a2[n];
+            n--;
+        };
+        l--;
+    };
+
+    return a1;
+};
+
+
+
+// bubble sort way
 var merge = function(nums1, m, nums2, n) {
     let j = 0;
     for (let i = m; m < nums1.length; i++) {
