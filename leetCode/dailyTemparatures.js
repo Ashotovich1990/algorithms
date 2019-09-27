@@ -1,3 +1,28 @@
+// using stack 
+var dailyTemperatures = function(T) {
+    let res = new Array(T.length); 
+    res[res.length-1] = 0;
+    
+    let stack = [0]; 
+    let i = 1; 
+    while (i < T.length) {
+        while (stack.length && T[i] > T[stack[stack.length-1]]) {
+            let idx = stack.pop();
+            res[idx] = i-idx;
+        };   
+        stack.push(i);  
+        i++;
+    };
+    
+    while (stack.length) {
+        let idx = stack.pop();
+        res[idx] = 0;
+    };
+    
+    return res;
+};
+
+// brute force
 var dailyTemperatures = function(T) {
     let res = new Array(T.length); 
     
