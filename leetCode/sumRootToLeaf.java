@@ -1,3 +1,29 @@
+// optimized 
+class Solution {
+    public static int sumNumbers(TreeNode root) {
+
+			return helper(root, 0);
+
+	}
+
+	static int helper(TreeNode root, int number) {
+		if (root == null) {
+			return Integer.valueOf(number);
+		}
+
+		if (root.left != null && root.right != null) {
+			return helper(root.left, number * 10 + root.val) + helper(root.right, number * 10 + root.val);
+		} else if (root.left != null) {
+			return helper(root.left, number * 10 + root.val);
+		} else if (root.right != null) {
+			return helper(root.right, number * 10 + root.val);
+		}
+
+		return Integer.valueOf(number * 10 + root.val);
+
+	}
+};
+// brute force 
 class Solution {
     ArrayList<String> paths = new ArrayList<String>();
     public int sumNumbers(TreeNode root) {
