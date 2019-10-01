@@ -1,3 +1,18 @@
+<!-- optimal -->
+function pivotIndex($nums) {
+        $totalSum = 0; 
+        foreach($nums as $num) {
+            $totalSum += $num;
+        }; 
+        
+        $leftSum = 0; 
+        for ($i = 0; $i < sizeof($nums); $i++) {
+            if ($totalSum === $leftSum*2 + $nums[$i]) return $i;
+            $leftSum += $nums[$i];
+        }
+        return -1;
+    }
+<!-- brute force -->
 function pivotIndex($nums) {
         $sumArr = array_fill(0, sizeof($nums), 0);
         
