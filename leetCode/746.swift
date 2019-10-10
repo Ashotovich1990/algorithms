@@ -14,3 +14,22 @@ class Solution {
         }
     }
 }
+
+// iterative 
+class Solution {
+    func minCostClimbingStairs(_ cost: [Int]) -> Int {
+        var oneStep = 0 
+        var twoStep = 0 
+        var stair = cost.count - 1
+        
+        while stair >= 0 {
+            var stairCost = cost[stair] + min(oneStep, twoStep)
+            twoStep = oneStep
+            oneStep = stairCost 
+            stair -= 1
+        }
+        
+        return min(oneStep, twoStep)
+        
+    }
+}
