@@ -1,5 +1,5 @@
 var letterCasePermutation = function(s) {
-    if (!s.length) return [];
+    if (!s.length) return []
     
     let digits = ['0','1','2','3', '4', '5', '6', '7', '8', '9']
     let nextLetters
@@ -20,4 +20,32 @@ var letterCasePermutation = function(s) {
     }
     
     return result
+};
+
+// recusrive 
+var letterCasePermutation = function(str) {
+    let digits = new Set(['0','1','2','3', '4', '5', '6', '7', '8', '9']);
+    let combinations = [];
+    
+    const backtrack = function(combination, letterPosition) {
+        if (letterPosition >= str.length) {
+            combinations.push(combination);
+            return
+        } 
+        let nextPosition = letterPosition + 1;
+        
+        if (digits.has(str[letterPosition])) {
+            backtrack(combination + str[letterPosition], nextPosition);
+        } else {
+            backtrack(combination + str[letterPosition].toLowerCase(), nextPosition);
+            backtrack(combination + str[letterPosition].toUpperCase(), nextPosition);
+        }
+        
+        return;
+    }
+    
+    
+    backtrack("", 0);
+    
+    return combinations;
 };
