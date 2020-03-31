@@ -18,9 +18,9 @@ class Tree {
         node.leftIndex = this.nestedSetIndx;
         this.assignNestedSetIndices(node.left);
 
+        this.assignNestedSetIndices(node.right);
         this.nestedSetIndx++;
         node.rightIndex = this.nestedSetIndx;
-        this.assignNestedSetIndices(node.right);
     }
 
     populate(array) {
